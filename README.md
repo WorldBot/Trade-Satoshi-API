@@ -1,21 +1,11 @@
 # Trade-Satoshi-API
 TradeSatoshi.com Compatible API
 
-Version 2016-11-11/01
+Version 2016-11-27/02
 
 
-Know Problems in Private API:
+Know Problems in API:
 
-GetBalance work but return 'success' => boolean false instead of true.
+Sometimes API return success=true with no message and no result instead of success=false
 
-GetBalances work but return 'success' => boolean false instead of true.
-
-GetOrders work but return 'success' => boolean false instead of true.
-
-GetTradeHistory work but return 'success' => boolean false instead of true.
-
-GetWithdrawals work but return 'success' => boolean false instead of true.
-
-GenerateAddress always generate a new adresse but return 'address' => null
-
-SubmitOrder Buy/Sell is disable for now
+Object/Array Keys can differ from the current website api documentation. (eg Avaliable is available, and sometimes case keys can be lower instead of upper)

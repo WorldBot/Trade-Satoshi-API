@@ -27,7 +27,7 @@
 
 	// $R = GetOrders('LTC_BTC',20); //Market,Count
 
-	// $R = SubmitOrder('NKA_BTC','Buy',10000,0.00000002); //Market,Type,Amount,Price
+	// $R = SubmitOrder('NKA_BTC','Buy',10000,0.00000001); //Market,Type,Amount,Price
 
 	// $R = CancelOrder('Single',1001,''); //Type,OrderId,Market
 
@@ -43,8 +43,14 @@
 
 
 	/* ----- RESULTS ----- */
-	if ($R->message)
-		echo '<hr />'.($R->message).'<hr />';
+	if (!$R->success || !$R->result || $R->message)
+	{
+		die('<h1>API ERROR</h1><h2>message: '.$R->message.'</h2>');
+	}
+	else
+	{
+		$R = $R->result;		
+	}
 
 	var_dump($R);
 ?>
