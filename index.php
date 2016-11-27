@@ -2,6 +2,27 @@
 	// feed $API_PUBLIC_KEY	& $API_SECRET_KEY in api_tradesatoshi.php file
 	@include('api_tradesatoshi.php');
 
+	// to avoid problems in case Keys
+	function keysToLower($obj)
+	{
+        if(!is_object($obj) && !is_array($obj)) return $obj;
+        foreach($obj as $key=>$element)
+        {
+                $element=keysToLower($element);
+                if(is_object($obj))
+                {
+                        $obj->{strtolower($key)}=$element;
+                        if(!ctype_lower($key)) unset($obj->{$key});
+                }
+                else if(is_array($obj) && ctype_upper($key))
+                {
+                        $obj[strtolower($key)]=$element;
+                        unset($obj[$key]);
+                }
+        }
+        return $obj;
+	}
+	
 	/* ----- Public Functions ----- */
 
 	 $R = GetCurrencies();
@@ -43,6 +64,9 @@
 
 
 	/* ----- RESULTS ----- */
+	
+	$R = keysToLower($R); // convert all keys returned to lower
+		
 	if (!$R->success || !$R->result || $R->message)
 	{
 		die('<h1>API ERROR</h1><h2>message: '.$R->message.'</h2>');
