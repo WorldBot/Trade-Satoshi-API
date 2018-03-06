@@ -5,7 +5,7 @@
 		$API_SECRET_KEY = ''; // Your Private Api Key
 
 		$PUBLIC_API 	= array('GetCurrencies','GetTicker','GetMarketHistory','GetMarketSummary','GetMarketSummaries','GetOrderBook');
-		$PRIVATE_API 	= array('GetBalance','GetBalances','GetOrder','GetOrders','SubmitOrder','CancelOrder','GetTradeHistory','GenerateAddress','SubmitWithdraw','GetDeposits','GetWithdrawals');
+		$PRIVATE_API 	= array('GetBalance','GetBalances','GetOrder','GetOrders','SubmitOrder','CancelOrder','GetTradeHistory','GenerateAddress','SubmitWithdraw','GetDeposits','GetWithdrawals','SubmitTransfer');
 
 		// Init curl
 		static $ch = null; $ch = curl_init();
@@ -140,4 +140,16 @@
 	*/
 	function GetWithdrawals($currency='all',$count=20)
 		{return api_query('GetWithdrawals',array('Currency'=>$currency,'Count'=>$count));}
-?>
+
+	/*	SubmitTransfer (require Transfer Enabled with API checked)
+		Currency: The currency name e.g. 'BTC' (required)
+		Username: The TradeSatoshi username of the person to transfer the funds to. (required)
+		Amount: The amount of coin to transfer e.g. 251.00000000 (required)
+	*/
+	function SubmitTransfer($currency=false,$username='',$amount=0.00000000)
+		{if($currency===false || empty($username) || $amount<0.00000001) return (object)array("success"=>false,"message"=>'Currency, Username and Amount should be filled'); else return api_query('SubmitTransfer',array('Currency'=>$currency,'Username'=>$username,'Amount'=>$amount));}
+
+		
+	/* Sample */
+$R = GetBalance($currency='BTC');
+var_dump($R);
