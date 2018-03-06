@@ -151,5 +151,7 @@
 
 		
 	/* Sample */
+/*
 $R = GetBalance($currency='BTC');
 var_dump($R);
+*/
