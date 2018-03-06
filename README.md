@@ -5,7 +5,9 @@ TradeSatoshi.com Compatible API
 Update 2018-03-05
 
 https://www.tradesatoshi.com/api/ changed to https://tradesatoshi.com/api/
+
 Added the SubmitTransfer function
+
 Added Sample
 
 -----
