@@ -19,13 +19,13 @@
 		// PUBLIC or PRIVATE API
 		if (in_array($ENDPOINT,$PUBLIC_API))
 		{
-			$URL = "https://www.tradesatoshi.com/api/public/".strtolower($ENDPOINT);
+			$URL = "https://tradesatoshi.com/api/public/".strtolower($ENDPOINT);
 			if ($REQ) $URL .= '?'.http_build_query($REQ,'','&');
 			curl_setopt($ch, CURLOPT_URL, $URL );
 		}
 		elseif (in_array($ENDPOINT,$PRIVATE_API))
 		{
-			$URL = "https://www.tradesatoshi.com/api/private/".strtolower($ENDPOINT);
+			$URL = "https://tradesatoshi.com/api/private/".strtolower($ENDPOINT);
 			$mt = explode(' ', microtime()); $NONCE = $mt[1].substr($mt[0], 2, 6);
 			$REQ = json_encode($REQ);
 			$SIGNATURE = $API_PUBLIC_KEY.'POST'.strtolower(urlencode($URL)).$NONCE.base64_encode($REQ);
