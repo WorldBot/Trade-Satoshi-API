@@ -67,13 +67,17 @@
 	
 	$R = keysToLower($R); // convert all keys returned to lower
 		
-	if (!$R->success || !$R->result || $R->message)
+	if (is_object($R) && (!$R->success || !$R->result || $R->message))
 	{
 		die('<h1>API ERROR</h1><h2>message: '.$R->message.'</h2>');
 	}
+	else if (is_object($R))
+	{
+		$R = $R->result;
+	}
 	else
 	{
-		$R = $R->result;		
+		die('Something went wrong (TradeSatoshi unavailable perhaps...) '.$R);
 	}
 
 	var_dump($R);
